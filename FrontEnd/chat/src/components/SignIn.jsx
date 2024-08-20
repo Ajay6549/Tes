@@ -4,39 +4,29 @@ import UserIcon from "./UserIcon";
 import IconEmail from "./IconEmail";
 import IconPassword from "./IconPassword";
 
-const SignUp = ({ onSignUp, onToggle }) => {
-  const [name, setName] = useState("");
+const SignIn = ({ onSignIn, onToggle }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignUp = async () => {
+  const handleSignIn = async () => {
     try {
-      await axios.post("http://localhost:3000/signup", {
-        name,
+      await axios.post("http://localhost:3000/login", {
         email,
         password,
       });
-      alert("Sign up successful!");
-      onSignUp(); // Call the onSignUp callback
-  
+      console.log(email)
+      console.log(password)
+      alert("Sign in successful!");
+      onSignIn(); // Call the onSignIn callback
     } catch (error) {
-      alert("Error during sign-up");
+      alert("Error during sign-in");
     }
   };
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <h1>Sign In</h1>
       <form action="">
-        <div className="input-group">
-          <UserIcon />
-          <input
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
         <div className="input-group">
           <IconEmail />
           <input
@@ -55,12 +45,15 @@ const SignUp = ({ onSignUp, onToggle }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        <p>
+          Lost password? <a href="#">Click here!</a>
+        </p>
         <div className="form-btn">
-          <button type="button" onClick={handleSignUp}>
-            Sign Up
+          <button type="button" onClick={handleSignIn}>
+            Sign In
           </button>
           <button type="button" onClick={onToggle}>
-            Back to Sign In
+            Create Account
           </button>
         </div>
       </form>
@@ -68,4 +61,4 @@ const SignUp = ({ onSignUp, onToggle }) => {
   );
 };
 
-export default SignUp;
+export default SignIn;

@@ -48,7 +48,7 @@ app.post('/signup', async (req, res) => {
 });
 
 
-app.post('/login', async (req, res) => {
+app.post('/login',async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -76,7 +76,7 @@ app.post('/login', async (req, res) => {
 });
 
 
-app.get('/posts', authenticateToken, (req, res) => {
+app.get('/posts',(req, res) => {
   res.json([
     { username: 'Kyle', title: 'Post1' },
     { username: 'Morris', title: 'Post2' }
@@ -86,10 +86,11 @@ app.get('/posts', authenticateToken, (req, res) => {
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
+
   const token = authHeader && authHeader.split(' ')[1];
 
   if (token == null) return res.sendStatus(401);
-
+    
   jwt.verify(token, 'your_jwt_secret', (err, user) => {
     if (err) return res.sendStatus(403);
     req.user = user;
