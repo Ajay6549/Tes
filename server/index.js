@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/crud', {
+mongoose.connect('mongodb://127.0.0.1:27017/crud', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => console.log('MongoDB connected'))
@@ -25,7 +25,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-//creating post Requiest
 app.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
 
